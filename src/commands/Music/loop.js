@@ -13,10 +13,10 @@ module.exports = {
         const player = client.music.players.get(msg.guild.id);
         if (!player || !player.queue[0]) return msg.channel.send(`${client.Emojis.x} No songs currently playing within this server!`);
         const { voiceChannel } = msg.member;
-        if(!voiceChannel || voiceChannel.id !== player.voiceChannelID) return msg.channel.send(`${client.Emojis.x} You need to be in the same voice channel as me to use that!`);
+        if(!voiceChannel || voiceChannel.id !== player.voiceChannel.id) return msg.channel.send(`${client.Emojis.x} You need to be in the same voice channel as me to use that!`);
 
         const option = args[0];
-        if(option.toLowerCase() === "song" || !option) {
+        if(!option || option.toLowerCase() === "song") {
             if(player.trackRepeat === false) {
                 player.setTrackRepeat(true);
                 msg.channel.send(`${client.Emojis.check} I am now looping **the current track**`);
