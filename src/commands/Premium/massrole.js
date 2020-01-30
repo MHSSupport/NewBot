@@ -25,7 +25,7 @@ module.exports = {
                 });
             } catch(err) {
                 client.log(err);
-                return client.Errors.unknownErr(msg);
+                return client.Errors.unknownErr(msg, err);
             };
         } else if(option.toLowerCase() === "remove") {
             try {
@@ -36,7 +36,7 @@ module.exports = {
                 });
             } catch(err) {
                 client.log(err);
-                return client.Errors.unknownErr(msg);
+                return client.Errors.unknownErr(msg, err);
             };
         };
         message.edit(`${client.Emojis.check} Done! I have changed the ${targetRole.name} role for ${memberRole.members.size} members with the ${memberRole.name} role!`)

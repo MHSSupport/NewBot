@@ -69,7 +69,7 @@ module.exports = {
             .setFooter(`Requested by ${msg.author.tag}`);
         msg.channel.send(embed).catch(err => {
             client.log(err);
-            return client.Errors.unknownErr(msg);
+            return client.Errors.unknownErr(msg, err);
         });
     }
 };

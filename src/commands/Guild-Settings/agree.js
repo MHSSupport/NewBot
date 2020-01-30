@@ -37,7 +37,7 @@ module.exports = {
                 });
             } catch(err) {
                 client.log(err);
-                return client.Errors.unknownErr(msg);
+                return client.Errors.unknownErr(msg, err);
             };
             msg.channel.send(`${client.Emojis.check} Disabled the entire \`agree\` system!`);
         } else return client.Errors.invalidArgs(msg, "agree");

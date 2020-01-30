@@ -36,7 +36,7 @@ module.exports = {
                 });
             } catch(err) {
                 client.log(err);
-                return client.Errors.unknownErr(msg);
+                return client.Errors.unknownErr(msg, err);
             };
             msg.channel.send(`${client.Emojis.x} Successfulyl disabled sugegstions!`);
         } else return client.Errors.invalidArgs(msg, "suggestions");

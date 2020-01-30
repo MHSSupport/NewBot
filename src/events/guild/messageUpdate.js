@@ -31,7 +31,7 @@ module.exports = {
                 };
             } catch (err) {
                 client.log(err);
-                client.Errors.unknownErr(msg);
+                client.Errors.unknownErr(msg, err);
             };
         };
     }

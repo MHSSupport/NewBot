@@ -20,8 +20,13 @@ const unknownErr = function(msg, err) {
         const embed = new RichEmbed()
             .setAuthor("An unknown error occured!")
             .setColor("RED")
-    } catch(err) {
-
+            .addField("Error", err.message)
+            .addField("Triggered by", `${msg.author} | ${msg.author.tag} | ${msg.author.id}`)
+            .addField("In guild", `${msg.guild.name} | ${msg.guild.id}`)
+            .setTimestamp();
+        bugs.send(embed);
+    } catch(e) {
+        client.log(e);
     };
     return msg.channel.send(message);
 };

@@ -14,7 +14,7 @@ module.exports = {
     run: async (client, msg, args) => {
         let m = await msg.channel.send(`${client.Emojis.loading} Generating..`);
         fetch("https://apis.duncte123.me/meme").then(res => res.json()).then(body => {
-            if(!body || !body.data.image) return client.Errors.unknownErr(msg);
+            if(!body || !body.data.image) return client.Errors.unknownErr(msg, err);
             let embed = new RichEmbed()
                 .setColor("RANDOM")
                 if(body.data.title) embed.setTitle(body.data.title).setURL(body.data.url)

@@ -14,7 +14,7 @@ module.exports = {
     run: async (client, msg, args) => {
         let m = await msg.channel.send(`${client.Emojis.loading} Generating..`);
         fetch("https://aws.random.cat/meow").then(res => res.json()).then(body => {
-            if(!body) return client.Errors.unknownErr(msg);
+            if(!body) return client.Errors.unknownErr(msg, err);
             let embed = new RichEmbed()
                 .setColor("RANDOM")
                 .setImage(body.file)
