@@ -61,7 +61,7 @@ module.exports = {
             const agreeSettings = await client.Models.Agree.findOne({
                 guildID: msg.guild.id
             });
-            if(agreeSettings !== null && agreeSettings.channelID === msg.channel.id && agreeSettings.roleID !== null) {
+            if(agreeSettings !== null && agreeSettings.channelID === msg.channel.id && agreeSettings.roleID !== null && !msg.member.hasPermission("ADIMINISTRATOR")) {
                 if(msg.content.toLowerCase() !== "agree") return msg.delete();
                 try {
                     await msg.member.addRole(agreeSettings.roleID);
@@ -69,7 +69,7 @@ module.exports = {
                     msg.delete();
                 } catch(err) {
                     client.log(err);
-                    return msg.channel.send(`${client.Emojis.x} I failed to verify you! Please contact the support team for this server! IF you believe this is a problem with the bot please report it to the developers!`);
+                    return msg.channel.send(`${client.Emojis.x} I failed to verify you! Please contact the support team for this server! If you believe this is a problem with the bot please report it to the developers!`);
                 };
             };
 

@@ -11,10 +11,11 @@ module.exports = {
     run: async (client, msg, args) => {
         const option = args[0];
         if(option.toLowerCase() === "enable") {
-            const chan = client.getChannelTarget(msg, args.slice(1).join(" "));
-            if(!chan) return msg.channel.send(`${client.Emojis.x} Failed to find the channel to enable \`agree\` for!`);
-            const role = client.getRoleTarget(msg, args.slice(2).join(" "));
+            const role = client.getRoleTarget(msg, args[1]);
             if(!role) return msg.channel.send(`${client.Emojis.x} Failed to find the role to enable \`agree\` for!`);
+            const chan = client.getChannelTarget(msg, args.slice(2).join(" "));
+            if(!chan) return msg.channel.send(`${client.Emojis.x} Failed to find the channel to enable \`agree\` for!`);
+
             let settings = await client.Models.Agree.findOne({
                 guildID: msg.guild.id
             });

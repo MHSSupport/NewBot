@@ -16,7 +16,8 @@ class NewBot extends Client {
         ];
         this.token = process.env.TOKEN;
         this.commandDir = process.env.COMMAND_DIR;
-		this.eventDir = process.env.EVENT_DIR;
+        this.eventDir = process.env.EVENT_DIR;
+        this.bugReportsChannelID = "";
         this.commands = new Collection();
         this.aliases = new Collection();
         this.commandCooldowns = new Map();
@@ -124,11 +125,11 @@ class NewBot extends Client {
         let target;
         if(query.length > 3) {
             target = msg.mentions.roles.first() ||
-                    msg.guild.roles.get(query.toLowerCase()) ||
-                    msg.guild.roles.find(r => r.name.includes(query.toLowerCase()));
+                    msg.guild.roles.get(query) ||
+                    msg.guild.roles.find(r => r.name.toLowerCase().includes(query.toLowerCase()));
         } else {
             target = msg.mentions.roles.first() ||
-                    msg.guild.roles.get(query.toLowerCase())
+                    msg.guild.roles.get(query)
         };
         return target;
     };

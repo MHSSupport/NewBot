@@ -1,4 +1,6 @@
 const emojis = require("./Emojis");
+const client = require("../index");
+const { RichEmbed } = require("discord.js");
 let message;
 
 const noPerms = function(msg, perms) {
@@ -13,6 +15,11 @@ const invalidTarget = function(msg) {
 
 const unknownErr = function(msg) {
     message = `${emojis.x} There was an unexpected error. Please report this if it continues.`;
+    try {
+        client.channels.get(client.bugReportsChannelID)
+    } catch(err) {
+
+    };
     return msg.channel.send(message);
 };
 
