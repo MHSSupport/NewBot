@@ -1,6 +1,5 @@
 let cooldown = new Set();
 const { RichEmbed } = require("discord.js");
-const { stripIndents } = require("common-tags");
 
 module.exports = {
     name: "bump",
@@ -63,13 +62,7 @@ module.exports = {
         });
         const endEmbed = new RichEmbed()
             .setColor("GREEN")
-            .setDescription(stripIndents`┏  ━  ━  ━  ━  ━  ┓
-                ∴**Oasis Advertising**∴
-                ┗  ━  ━  ━  ━  ━  ┛
-                Looking for somewhere to advertise easily at no cost?
-                Oasis is just right for you! We’re a large advertising community welcoming all that join.
-                
-                __**[Joining is just as easy as one click! Join now!](https://discord.gg/TVU9WwN)**__`)
+            .setDescription(`Looking for somewhere to advertise easily at no cost?\nOasis is just right for you! We’re a large advertising community welcoming all that join.\n__**[Joining is just as easy as one click! Join now!](https://discord.gg/TVU9WwN)**__`)
         m.edit(`${client.Emojis.check} Bumped to all available servers! servers!`, endEmbed);
         cooldown.add(msg.guild.id);
         setTimeout(function() {
