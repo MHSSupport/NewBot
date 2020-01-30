@@ -54,6 +54,7 @@ const Logs = new mongoose.Schema({
     starboardChannelID: String,
     antiInviteChannelIDs: Array,
     antiSwear: Boolean,
+    antiSpam: Boolean,
 });
 
 const Premium = new mongoose.Schema({

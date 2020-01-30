@@ -1,5 +1,6 @@
 const cooldown = new Set();
 const { RichEmbed } = require("discord.js");
+const talked = new Set();
 
 module.exports = {
     name: "message",
@@ -11,12 +12,30 @@ module.exports = {
 
         if(!msg.guild) return;
 
+        const settings = await client.Models.Logs.findOne({
+            guildID: msg.guild.id,
+        });
+        if(settings !== null && settings.antiSpam === true) {
+            if(talked.has(msg.author.id)) {
+                msg.delete(`${msg.author.tag} was spamming!`);
+                msg.channel.send(`${client.Emojis.x} You are sending messages to quickly **${msg.author.username}**#${msg.author.discriminator}!`).then(m => m.delete(10000));
+                setTimeout(function() {
+                    talked.delete(msg.author.id);
+                }, 1000);
+            } else {
+                talked.add(msg.author.id);
+                setTimeout(function() {
+                    talked.delete(msg.author.id);
+                }, 1000);
+            };
+        };
+
         const confPrefix = await client.Models.Prefix.findOne({
             guildID: msg.guild.id
         });
         const prefix = confPrefix ? confPrefix.prefix : client.prefix;
 
-        if(msg.content.startsWith(prefix) && msg.guild) {
+        if(msg.content.startsWith(prefix)) {
             const args = msg.content.slice(prefix.length).trim().split(" ");
             const cmd = args.shift().toLowerCase();
             try {
@@ -46,11 +65,8 @@ module.exports = {
                 if(msg.content.toLowerCase() !== "agree") return msg.delete();
                 try {
                     await msg.member.addRole(agreeSettings.roleID);
-                    const m = await msg.channel.send(`${client.Emojis.check} You have been verified **${msg.author.username}**${msg.author.discriminator}!`)
+                    msg.channel.send(`${client.Emojis.check} You have been verified **${msg.author.username}**${msg.author.discriminator}!`).then(m => m.delete(5000));
                     msg.delete();
-                    setTimeout(function() {
-                        m.delete();
-                    }, 5000);
                 } catch(err) {
                     client.log(err);
                     return msg.channel.send(`${client.Emojis.x} I failed to verify you! Please contact the support team for this server! IF you believe this is a problem with the bot please report it to the developers!`);
@@ -64,10 +80,7 @@ module.exports = {
                         .setColor("#36393F")
                         .setDescription(`Hey there! I am **${client.user.username}**, here to help. I was brought to life by **${client.creator.tag}**! Check out my repository [here](https://github.com/MatievisTheKat/NewBot). For support please [join here](https://discord.gg/3JMEGcQ). Lastly, to get started just type \`${prefix}help\` and everything will come up!`)
                         .setTimestamp();
-                    const m = await msg.channel.send(embed);
-                    setTimeout(function() {
-                        m.delete();
-                    }, 20000)
+                    msg.channel.send(embed).then(m => m.delete(20000));
                 };
                 let mentioned = client.afk.get(msg.mentions.users.first().id);
                 if(mentioned) msg.channel.send(`**${mentioned.usertag}** is currently afk. Reason: ${mentioned.reason}`);
@@ -123,10 +136,7 @@ module.exports = {
                         try {
                             msg.guild.channels.get(lvlUpChannel.channel).send(`${client.Emojis.etada} Well done ${msg.author}! You have leveled up to ${xp.level}`);
                         } catch(err) {
-                            let m = await msg.channel.send(`${client.Emojis.etada} Well done ${msg.author}! You have leveled up to ${xp.level}`);
-                            setTimeout(function() {
-                                m.delete();
-                            }, 8000);
+                            msg.channel.send(`${client.Emojis.etada} Well done ${msg.author}! You have leveled up to ${xp.level}`).then(m => m.delete(8000));
                         };
                     };
                 };
