@@ -21,8 +21,8 @@ module.exports = {
             if(settings === null) settings = new client.Models.Tickets({
                 guildID: msg.guild.id
             });
-            settings.enabled - true;
-            settings.save().catch(err => {
+            settings.enabled = true;
+            await settings.save().catch(err => {
                 client.log(err);
                 return client.Errors.saveFail(msg);
             });
@@ -30,11 +30,11 @@ module.exports = {
         } else if(option.toLowerCase() === "disable") {
             if(settings === null) return msg.channel.send(`${client.Emojis.x} Tickets are already disabled on this server!`);
             settings.enabled = false;
-            settings.save().catch(err => {
+            await settings.save().catch(err => {
                 client.log(err);
                 return client.Errors.saveFail(msg);
             });
-            msg.channel.send(`${client.Emojis.check} disabled tickets for this server!`);
+            msg.channel.send(`${client.Emojis.check} Disabled tickets for this server!`);
         } else return client.Errors.invalidArgs(msg, "tickets");
     }
 };

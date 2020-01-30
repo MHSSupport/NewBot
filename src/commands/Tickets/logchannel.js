@@ -15,7 +15,7 @@ module.exports = {
                 guildID: msg.guild.id
             });
             const chan = msg.guild.channels.get(settings.logChannelID);
-            if(settings === null || settings.supportRoleID === null ||!role) return msg.channel.send(`${client.Emojis.x} This server doesnt have a ticket log set!`);
+            if(settings === null || settings.supportRoleID === null) return msg.channel.send(`${client.Emojis.x} This server doesnt have a ticket log set!`);
             msg.channel.send(`**${chan}** is the current ticket logging channel on this server!`);
         } else if(args[0]) {
             const chan = client.getChannelTarget(msg, args.join(" "));
