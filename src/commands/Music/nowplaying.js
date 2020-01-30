@@ -15,7 +15,7 @@ module.exports = {
     run: async (client, msg, args) => {
         const player = client.music.players.get(msg.guild.id);
         if (!player || !player.queue[0]) return msg.channel.send(`${client.Emojis.x} No songs currently playing within this server!`);
-        const { title, author, duration, thumbnail } = player.queue[0];
+        const { title, author, duration, thumbnail, requester } = player.queue[0];
           
         function getnowplaying(){
             let amount = `00:${Utils.formatTime(player.position, true)}`
@@ -48,8 +48,9 @@ module.exports = {
                         };
                     };
                     m.edit(giveEmbed);
-                }, 4000);
+                }, 10000);
             });
         };
+        getnowplaying();
     }
 };
