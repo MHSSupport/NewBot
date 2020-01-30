@@ -1,7 +1,7 @@
 module.exports = {
     name: "mailcategory",
     aliases: ["modmailcategory", "mmc", "mmcategory"],
-    category: "9.3. 📩 | ModMail",
+    category: "9.3. 📩 | Tickets",
     description: "Set the category for new threads to appear in",
     usage: "<category>",
     permissions: "MANAGE_GUILD",
