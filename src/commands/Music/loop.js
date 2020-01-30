@@ -1,6 +1,6 @@
 module.exports = {
     name: "loop",
-    aliases: ["repeat"],
+    aliases: ["repeat", "unloop", "unrepeat"],
     category: "7.1. 🔊 | Music",
     description: "Loop a song or the queue",
     usage: "[song | queue]",

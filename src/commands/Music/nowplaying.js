@@ -44,7 +44,11 @@ module.exports = {
                             let { title, author, duration, thumbnail, requester } = player.queue[0];
                             const amount = `${Utils.formatTime(player.position, true)}`;
                             const part = Math.floor((player.position / duration) * 10);
-                            giveEmbed.setDescription(`${player.playing ? "▶️" : "⏸️"} Currently Playing ${title}\n${"▬".repeat(part) + "🔘" + "▬".repeat(9 - part)}[${amount} / ${Utils.formatTime(duration, true)}]\nRequested By: ${requester.tag}`);
+                            try{
+                                giveEmbed.setDescription(`${player.playing ? "▶️" : "⏸️"} Currently Playing ${title}\n${"▬".repeat(part) + "🔘" + "▬".repeat(9 - part)}[${amount} / ${Utils.formatTime(duration, true)}]\nRequested By: ${requester.tag}`);
+                            } catch(err) {
+                                client.log(err);
+                            };
                         };
                     };
                     m.edit(giveEmbed);
