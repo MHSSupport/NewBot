@@ -13,10 +13,13 @@ const invalidTarget = function(msg) {
     return msg.channel.send(message);
 };
 
-const unknownErr = function(msg) {
+const unknownErr = function(msg, err) {
     message = `${emojis.x} There was an unexpected error. Please report this if it continues.`;
     try {
-        client.channels.get(client.bugReportsChannelID)
+        const bugs = client.channels.get(client.bugReportsChannelID);
+        const embed = new RichEmbed()
+            .setAuthor("An unknown error occured!")
+            .setColor("RED")
     } catch(err) {
 
     };
