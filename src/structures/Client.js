@@ -10,7 +10,7 @@ class NewBot extends Client {
         this.botInvite = "https://discordapp.com/api/oauth2/authorize?client_id=663333257517072384&permissions=8&scope=bot";
         this.supportInvite = "https://discord.gg/3JMEGcQ";
         this.websiteLink = "https://newbot.xyz";
-        this.premiumImage = "";
+        this.premiumImage = "672532177942085672";
         this.nodes = [
             { host: "localhost", port: "2333", password: "youshallnotpass"}
         ];
